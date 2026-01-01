@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Environment Files - Step by Step</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .step {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 5px;
+        }
+        
+        .step h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .file-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+        
+        .file-name {
+            color: #4ec9b0;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .file-content {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #4caf50;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .instructions {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+        
+        .instructions ol {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+        
+        .instructions li {
+            margin: 8px 0;
+        }
+        
+        .test-btn {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+        }
+        
+        .test-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .highlight {
+            background: #fff9c4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .notification.hide {
+            animation: slideOut 0.3s ease;
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 Setup Environment Files</h1>
+            <p>Create your .env files in 2 simple steps</p>
+        </div>
+        
+        <div class="content">
+            <!-- Step 1 -->
+            <div class="step">
+                <h2><span class="step-number">1</span>Create backend/.env file</h2>
+                
+                <div class="instructions">
+                    <ol>
+                        <li>Open your file explorer</li>
+                        <li>Navigate to the <span class="highlight">backend</span> folder</li>
+                        <li>Create a new file named <span class="highlight">.env</span> (no extension, just .env)</li>
+                        <li>Copy the content below and paste it into the file</li>
+                        <li>Replace the placeholder values with your actual Supabase credentials</li>
+                        <li>Save the file</li>
+                    </ol>
+                </div>
+                
+                <div class="file-box">
+                    <button class="copy-btn" onclick="copyFileContent(this, 'backend')">Copy All</button>
+                    <div class="file-name">📁 backend/.env</div>
+                    <div class="file-content" id="backend-content">SUPABASE_URL=https://your-project-id.supabase.co
+SUPABASE_KEY=your-publishable-key-here
+SUPABASE_SERVICE_KEY=sb_secret_3uMPbHJx8bZVF7FX0dTxcg_Olo4gPJa</div>
+                </div>
+                
+                <div class="success-box" style="margin-top: 15px;">
+                    <strong>💡 Tip:</strong> Click "Copy All" button above to copy the entire file content at once, then paste it into your backend/.env file!
+                </div>
+                
+                <div class="info-box">
+                    <strong>📝 What to replace:</strong>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><code>https://your-project-id.supabase.co</code> → Your Project URL from Supabase</li>
+                        <li><code>your-publishable-key-here</code> → Your publishable key (starts with <code>sb_publishable_...</code>)</li>
+                        <li>The service key is already filled in ✅</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="step">
+                <h2><span class="step-number">2</span>Create root .env file</h2>
+                
+                <div class="instructions">
+                    <ol>
+                        <li>Go back to the root folder (where <span class="highlight">package.json</span> is)</li>
+                        <li>Create a new file named <span class="highlight">.env</span> (no extension)</li>
+                        <li>Copy the content below and paste it into the file</li>
+                        <li>Replace the placeholder values with your actual Supabase credentials</li>
+                        <li>Save the file</li>
+                    </ol>
+                </div>
+                
+                <div class="file-box">
+                    <button class="copy-btn" onclick="copyFileContent(this, 'root')">Copy All</button>
+                    <div class="file-name">📁 .env (root directory)</div>
+                    <div class="file-content" id="root-content">VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_ANON_KEY=your-publishable-key-here</div>
+                </div>
+                
+                <div class="success-box" style="margin-top: 15px;">
+                    <strong>💡 Tip:</strong> Click "Copy All" button above to copy the entire file content at once, then paste it into your root .env file!
+                </div>
+                
+                <div class="info-box">
+                    <strong>📝 What to replace:</strong>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><code>https://your-project-id.supabase.co</code> → Your Project URL from Supabase</li>
+                        <li><code>your-publishable-key-here</code> → Your publishable key (starts with <code>sb_publishable_...</code>)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="step">
+                <h2><span class="step-number">3</span>Test Your Connection</h2>
+                
+                <div class="instructions">
+                    <p>After creating both .env files, test your Supabase connection:</p>
+                </div>
+                
+                <div class="file-box">
+                    <button class="copy-btn" onclick="copyCommand('python test_supabase_connection.py')">Copy</button>
+                    <div class="file-name">💻 Test Connection Command:</div>
+                    <div class="file-content" style="background: #1e1e1e; padding: 15px; border-radius: 5px;">
+python test_supabase_connection.py</div>
+                </div>
+                
+                <div class="success-box" style="margin-top: 20px;">
+                    <strong>✅ Expected Result:</strong>
+                    <p style="margin-top: 10px;">You should see "[SUCCESS] CONNECTION TEST PASSED!" if everything is working correctly.</p>
+                    <p style="margin-top: 10px;"><strong>If tables don't exist:</strong> You'll see a warning - that's OK! Just run the SQL schema in Supabase SQL Editor.</p>
+                </div>
+            </div>
+            
+            <!-- Step 4 -->
+            <div class="step">
+                <h2><span class="step-number">4</span>Start Your Application</h2>
+                
+                <div class="instructions">
+                    <p>After testing the connection, start your application servers:</p>
+                </div>
+                
+                <h3 style="margin-top: 20px; color: #667eea;">Terminal 1 - Backend Server</h3>
+                <div class="file-box">
+                    <button class="copy-btn" onclick="copyCommand('cd backend')">Copy</button>
+                    <div class="file-name">💻 Command 1:</div>
+                    <div class="file-content" style="background: #1e1e1e; padding: 15px; border-radius: 5px;">
+cd backend</div>
+                </div>
+                
+                <div class="file-box" style="margin-top: 10px;">
+                    <button class="copy-btn" onclick="copyCommand('python main.py')">Copy</button>
+                    <div class="file-name">💻 Command 2:</div>
+                    <div class="file-content" style="background: #1e1e1e; padding: 15px; border-radius: 5px;">
+python main.py</div>
+                </div>
+                
+                <div class="info-box" style="margin-top: 15px;">
+                    <strong>✅ Success:</strong> You should see "Uvicorn running on http://0.0.0.0:8000"
+                    <br><strong>⚠️ Keep this terminal open!</strong> Open a NEW terminal for the frontend.
+                </div>
+                
+                <h3 style="margin-top: 30px; color: #667eea;">Terminal 2 - Frontend Server (NEW TERMINAL)</h3>
+                <div class="file-box">
+                    <button class="copy-btn" onclick="copyCommand('cd \"c:\\Users\\suman\\OneDrive\\Documents\\Year_2026_Merged_Web App\"')">Copy</button>
+                    <div class="file-name">💻 Command 1:</div>
+                    <div class="file-content" style="background: #1e1e1e; padding: 15px; border-radius: 5px;">
+cd "c:\Users\suman\OneDrive\Documents\Year_2026_Merged_Web App"</div>
+                </div>
+                
+                <div class="file-box" style="margin-top: 10px;">
+                    <button class="copy-btn" onclick="copyCommand('npm run dev')">Copy</button>
+                    <div class="file-name">💻 Command 2:</div>
+                    <div class="file-content" style="background: #1e1e1e; padding: 15px; border-radius: 5px;">
+npm run dev</div>
+                </div>
+                
+                <div class="success-box" style="margin-top: 15px;">
+                    <strong>✅ Success:</strong> You should see "Local: http://localhost:3000/"
+                    <br><strong>🌐 Open your browser</strong> and go to: <a href="http://localhost:3000" target="_blank" style="color: #4caf50; font-weight: bold;">http://localhost:3000</a>
+                </div>
+            </div>
+            
+            <!-- Step 5 -->
+            <div class="step">
+                <h2><span class="step-number">5</span>Quick Test Commands</h2>
+                
+                <div class="instructions">
+                    <p>Use these commands to verify everything is working:</p>
+                </div>
+                
+                <div class="file-box">
+                    <button class="copy-btn" onclick="copyCommand('python test_supabase_connection.py')">Copy</button>
+                    <div class="file-name">🧪 Test Supabase Connection:</div>
+                    <div class="file-content" style="background: #1e1e1e; padding: 15px; border-radius: 5px;">
+python test_supabase_connection.py</div>
+                </div>
+                
+                <div class="file-box" style="margin-top: 10px;">
+                    <button class="copy-btn" onclick="copyCommand('Get-NetTCPConnection -LocalPort 3000,8000 -ErrorAction SilentlyContinue')">Copy</button>
+                    <div class="file-name">🔍 Check if Servers are Running:</div>
+                    <div class="file-content" style="background: #1e1e1e; padding: 15px; border-radius: 5px;">
+Get-NetTCPConnection -LocalPort 3000,8000 -ErrorAction SilentlyContinue</div>
+                </div>
+                
+                <div class="file-box" style="margin-top: 10px;">
+                    <button class="copy-btn" onclick="copyCommand('Get-Process | Where-Object {$_.ProcessName -eq \"node\"} | Stop-Process -Force')">Copy</button>
+                    <div class="file-name">🛑 Stop All Node Processes (if needed):</div>
+                    <div class="file-content" style="background: #1e1e1e; padding: 15px; border-radius: 5px;">
+Get-Process | Where-Object {$_.ProcessName -eq "node"} | Stop-Process -Force</div>
+                </div>
+            </div>
+            
+            <!-- Where to find credentials -->
+            <div class="step">
+                <h2>📍 Where to Find Your Credentials</h2>
+                
+                <div class="instructions">
+                    <ol>
+                        <li>Go to <a href="https://supabase.com" target="_blank">supabase.com</a> and log in</li>
+                        <li>Select your project</li>
+                        <li>Click <strong>Settings</strong> (gear icon) in the left sidebar</li>
+                        <li>Click <strong>API Keys</strong></li>
+                        <li>You'll see:</li>
+                    </ol>
+                </div>
+                
+                <div class="info-box">
+                    <strong>On the API Keys page, you'll find:</strong>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Project URL</strong> - At the top of the page (looks like <code>https://xxxxx.supabase.co</code>)</li>
+                        <li><strong>Publishable key</strong> - In the "Publishable key" section (starts with <code>sb_publishable_...</code>)</li>
+                        <li><strong>Secret key</strong> - In the "Secret keys" section (starts with <code>sb_secret_...</code>) - Click "Reveal" to see it</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Quick Reference -->
+            <div class="step">
+                <h2>📋 Quick Reference</h2>
+                
+                <div class="file-box" style="background: #f8f9fa; color: #333;">
+                    <div class="file-content" style="background: white; color: #333;">
+<strong>backend/.env needs:</strong>
+- SUPABASE_URL (Project URL)
+- SUPABASE_KEY (Publishable key)
+- SUPABASE_SERVICE_KEY (Secret key)
+
+<strong>root .env needs:</strong>
+- VITE_SUPABASE_URL (Project URL)
+- VITE_SUPABASE_ANON_KEY (Publishable key)
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Troubleshooting -->
+            <div class="warning-box">
+                <strong>⚠️ Common Issues:</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>File not found error:</strong> Make sure the file is named exactly <code>.env</code> (not <code>.env.txt</code>)</li>
+                    <li><strong>Connection fails:</strong> Double-check that you copied the keys correctly (no extra spaces)</li>
+                    <li><strong>Tables don't exist:</strong> Run <code>supabase_schema.sql</code> in Supabase SQL Editor first</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function copyFileContent(button, type) {
+            let content;
+            if (type === 'backend') {
+                content = document.getElementById('backend-content').textContent;
+            } else {
+                content = document.getElementById('root-content').textContent;
+            }
+            
+            const textarea = document.createElement('textarea');
+            textarea.value = content;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.classList.add('copied');
+                
+                // Show notification
+                showNotification('File content copied! Paste it into your .env file.');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy. Please copy manually.');
+            }
+            
+            document.body.removeChild(textarea);
+        }
+        
+        function copyCommand(command) {
+            const textarea = document.createElement('textarea');
+            textarea.value = command;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                // Visual feedback
+                const buttons = document.querySelectorAll('.copy-btn');
+                buttons.forEach(btn => {
+                    if (btn.textContent.includes('Copy') && btn.onclick.toString().includes(command.substring(0, 10))) {
+                        const originalText = btn.textContent;
+                        btn.textContent = '✓ Copied!';
+                        btn.classList.add('copied');
+                        setTimeout(() => {
+                            btn.textContent = originalText;
+                            btn.classList.remove('copied');
+                        }, 2000);
+                    }
+                });
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy. Please copy manually: ' + command);
+            }
+            
+            document.body.removeChild(textarea);
+        }
+        
+        function showNotification(message) {
+            // Remove existing notification if any
+            const existing = document.querySelector('.notification');
+            if (existing) {
+                existing.remove();
+            }
+            
+            // Create new notification
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('hide');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+

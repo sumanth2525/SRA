@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Tracker - Setup Commands</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .section p {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .command-box {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+        
+        .command-box:hover {
+            background: #e8e8e8;
+            border-color: #667eea;
+        }
+        
+        .command-text {
+            flex: 1;
+            color: #333;
+            word-break: break-all;
+            padding-right: 10px;
+        }
+        
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        .copy-btn.copied {
+            background: #4caf50;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .note {
+            background: #fff9c4;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 3px solid #fbc02d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Productivity Tracker</h1>
+            <p>Setup Commands & Instructions</p>
+        </div>
+        
+        <div class="content">
+            <!-- Step 1: Supabase Setup -->
+            <div class="section">
+                <h2><span class="step-number">1</span>Supabase Setup</h2>
+                <p>First, you need to set up your Supabase database:</p>
+                
+                <div class="info-box">
+                    <strong>📝 Instructions:</strong>
+                    <ol style="margin-left: 20px; margin-top: 10px;">
+                        <li>Go to <a href="https://supabase.com" target="_blank">supabase.com</a> and create a free account</li>
+                        <li>Create a new project (wait ~2 minutes for it to be ready)</li>
+                        <li>Go to <strong>SQL Editor</strong> in the left sidebar</li>
+                        <li>Click <strong>New Query</strong></li>
+                        <li>Copy and paste the contents of <code>supabase_schema.sql</code></li>
+                        <li>Click <strong>Run</strong> to execute</li>
+                        <li>Go to <strong>Settings</strong> → <strong>API</strong> to get your credentials</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <!-- Step 2: Environment Variables -->
+            <div class="section">
+                <h2><span class="step-number">2</span>Create Environment Files</h2>
+                <p>Create environment files with your Supabase credentials:</p>
+                
+                <div class="command-box">
+                    <div class="command-text"># Create .env file in root directory</div>
+                    <button class="copy-btn" onclick="copyCommand(this, '# Create .env file in root directory')">Copy</button>
+                </div>
+                
+                <div class="note">
+                    <strong>Note:</strong> Create a file named <code>.env</code> in the root directory with this content:
+                </div>
+                
+                <div class="code-block">
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key-here
+                </div>
+                
+                <div class="command-box">
+                    <div class="command-text"># Create backend/.env file</div>
+                    <button class="copy-btn" onclick="copyCommand(this, '# Create backend/.env file')">Copy</button>
+                </div>
+                
+                <div class="note">
+                    <strong>Note:</strong> Create a file named <code>.env</code> in the <code>backend</code> directory with this content:
+                </div>
+                
+                <div class="code-block">
+SUPABASE_URL=https://your-project-id.supabase.co
+SUPABASE_KEY=your-anon-key-here
+SUPABASE_SERVICE_KEY=your-service-role-key-here
+                </div>
+            </div>
+            
+            <!-- Step 3: Install Dependencies -->
+            <div class="section">
+                <h2><span class="step-number">3</span>Install Dependencies</h2>
+                <p>Install all required packages for the project:</p>
+                
+                <div class="command-box">
+                    <div class="command-text">npm install</div>
+                    <button class="copy-btn" onclick="copyCommand(this, 'npm install')">Copy</button>
+                </div>
+                
+                <div class="command-box">
+                    <div class="command-text">pip install fastapi uvicorn python-dotenv supabase pydantic python-multipart</div>
+                    <button class="copy-btn" onclick="copyCommand(this, 'pip install fastapi uvicorn python-dotenv supabase pydantic python-multipart')">Copy</button>
+                </div>
+                
+                <div class="warning-box">
+                    <strong>⚠️ Alternative:</strong> If the above pip command doesn't work, try:
+                </div>
+                
+                <div class="command-box">
+                    <div class="command-text">pip install -r requirements.txt</div>
+                    <button class="copy-btn" onclick="copyCommand(this, 'pip install -r requirements.txt')">Copy</button>
+                </div>
+            </div>
+            
+            <!-- Step 4: Start Backend Server -->
+            <div class="section">
+                <h2><span class="step-number">4</span>Start Backend Server</h2>
+                <p>Start the Python FastAPI backend server:</p>
+                
+                <div class="command-box">
+                    <div class="command-text">cd backend</div>
+                    <button class="copy-btn" onclick="copyCommand(this, 'cd backend')">Copy</button>
+                </div>
+                
+                <div class="command-box">
+                    <div class="command-text">python main.py</div>
+                    <button class="copy-btn" onclick="copyCommand(this, 'python main.py')">Copy</button>
+                </div>
+                
+                <div class="success-box">
+                    <strong>✅ Success:</strong> You should see "Uvicorn running on http://0.0.0.0:8000"
+                </div>
+                
+                <div class="warning-box">
+                    <strong>⚠️ Note:</strong> Keep this terminal window open. Open a NEW terminal for the frontend.
+                </div>
+            </div>
+            
+            <!-- Step 5: Start Frontend Server -->
+            <div class="section">
+                <h2><span class="step-number">5</span>Start Frontend Server</h2>
+                <p>In a NEW terminal window, start the React frontend:</p>
+                
+                <div class="command-box">
+                    <div class="command-text">cd "c:\Users\suman\OneDrive\Documents\Year_2026_Merged_Web App"</div>
+                    <button class="copy-btn" onclick="copyCommand(this, 'cd "c:\\Users\\suman\\OneDrive\\Documents\\Year_2026_Merged_Web App"')">Copy</button>
+                </div>
+                
+                <div class="command-box">
+                    <div class="command-text">npm run dev</div>
+                    <button class="copy-btn" onclick="copyCommand(this, 'npm run dev')">Copy</button>
+                </div>
+                
+                <div class="success-box">
+                    <strong>✅ Success:</strong> You should see "Local: http://localhost:3000/"
+                </div>
+            </div>
+            
+            <!-- Step 6: Access Application -->
+            <div class="section">
+                <h2><span class="step-number">6</span>Access the Application</h2>
+                <p>Open your browser and navigate to:</p>
+                
+                <div class="command-box">
+                    <div class="command-text">http://localhost:3000</div>
+                    <button class="copy-btn" onclick="copyCommand(this, 'http://localhost:3000')">Copy</button>
+                </div>
+                
+                <div class="info-box">
+                    <strong>📱 The application should now be running!</strong>
+                </div>
+            </div>
+            
+            <!-- Troubleshooting -->
+            <div class="section">
+                <h2><span class="step-number">?</span>Troubleshooting</h2>
+                
+                <div class="command-box">
+                    <div class="command-text"># If port 3000 is busy, Vite will use 3001, 3002, etc.</div>
+                    <button class="copy-btn" onclick="copyCommand(this, '# Check which port is being used in the terminal output')">Copy</button>
+                </div>
+                
+                <div class="command-box">
+                    <div class="command-text"># Kill all node processes (if needed)</div>
+                    <button class="copy-btn" onclick="copyCommand(this, 'Get-Process | Where-Object {$_.ProcessName -eq "node"} | Stop-Process -Force')">Copy</button>
+                </div>
+                
+                <div class="command-box">
+                    <div class="command-text"># Check if servers are running</div>
+                    <button class="copy-btn" onclick="copyCommand(this, 'Get-NetTCPConnection -LocalPort 3000,8000 -ErrorAction SilentlyContinue')">Copy</button>
+                </div>
+                
+                <div class="warning-box">
+                    <strong>Common Issues:</strong>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Missing Supabase credentials:</strong> Make sure both .env files are created with correct values</li>
+                        <li><strong>Port already in use:</strong> Close other applications using ports 3000 or 8000</li>
+                        <li><strong>Module not found:</strong> Run <code>npm install</code> again</li>
+                        <li><strong>Database errors:</strong> Make sure you ran the SQL schema in Supabase</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Quick Start (All Commands) -->
+            <div class="section">
+                <h2>⚡ Quick Start (All Commands at Once)</h2>
+                <p>Copy these commands in order:</p>
+                
+                <div class="code-block">
+# 1. Install frontend dependencies
+npm install
+
+# 2. Install backend dependencies
+pip install fastapi uvicorn python-dotenv supabase pydantic python-multipart
+
+# 3. Start backend (Terminal 1)
+cd backend
+python main.py
+
+# 4. Start frontend (Terminal 2 - NEW TERMINAL)
+cd "c:\Users\suman\OneDrive\Documents\Year_2026_Merged_Web App"
+npm run dev
+
+# 5. Open browser
+# Navigate to: http://localhost:3000
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function copyCommand(button, command) {
+            // Create a temporary textarea
+            const textarea = document.createElement('textarea');
+            textarea.value = command;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                // Visual feedback
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy command. Please copy manually: ' + command);
+            }
+            
+            document.body.removeChild(textarea);
+        }
+        
+        // Add click to copy for code blocks
+        document.querySelectorAll('.code-block').forEach(block => {
+            block.style.cursor = 'pointer';
+            block.title = 'Click to select all';
+            block.addEventListener('click', function() {
+                const range = document.createRange();
+                range.selectNodeContents(this);
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+            });
+        });
+    </script>
+</body>
+</html>
+

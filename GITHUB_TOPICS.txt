@@ -1,0 +1,17 @@
+react
+python
+fastapi
+supabase
+productivity
+tracking
+health
+finance
+notes
+investments
+password-manager
+full-stack
+web-app
+mobile-responsive
+tailwindcss
+vite
+

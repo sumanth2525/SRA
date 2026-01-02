@@ -1,0 +1,2 @@
+Full-stack productivity tracking application with React frontend and Python FastAPI backend. Track health, finances, notes, investments, and passwords in one place.
+

@@ -78,7 +78,8 @@ export default function Finance() {
       loadExpenses()
     } catch (error) {
       console.error('Error adding expense:', error)
-      alert('Error adding expense')
+      const errorMessage = error?.message || error?.error_description || 'Unknown error occurred'
+      alert(`Error adding expense: ${errorMessage}\n\nCheck browser console for details.`)
     }
   }
 

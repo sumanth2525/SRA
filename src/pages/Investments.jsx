@@ -60,7 +60,8 @@ export default function Investments() {
       loadInvestments()
     } catch (error) {
       console.error('Error adding investment:', error)
-      alert('Error adding investment')
+      const errorMessage = error?.message || error?.error_description || 'Unknown error occurred'
+      alert(`Error adding investment: ${errorMessage}\n\nCheck browser console for details.`)
     }
   }
 

@@ -59,7 +59,8 @@ export default function Passwords() {
       loadPasswords()
     } catch (error) {
       console.error('Error adding password:', error)
-      alert('Error adding password')
+      const errorMessage = error?.message || error?.error_description || 'Unknown error occurred'
+      alert(`Error adding password: ${errorMessage}\n\nCheck browser console for details.`)
     }
   }
 

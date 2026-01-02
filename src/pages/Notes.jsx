@@ -74,7 +74,8 @@ export default function Notes() {
       loadNotes()
     } catch (error) {
       console.error('Error adding note:', error)
-      alert('Error adding note')
+      const errorMessage = error?.message || error?.error_description || 'Unknown error occurred'
+      alert(`Error adding note: ${errorMessage}\n\nCheck browser console for details.`)
     }
   }
 
